@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: landing-page-service
+  namespace: landing-page
+  labels:
+    app: landing-page-service
+spec:
+  ports:
+  - name: http
+    port: 80
+  selector:
+    app: landing-page
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: shopping-page-service
+  namespace: shopping-page
+  labels:
+    app: shopping-page-service
+spec:
+  ports:
+  - name: http
+    port: 80
+  selector:
+    app: shopping-page
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: watch-page-service
+  namespace: watch-page
+  labels:
+    app: watch-page-service
+spec:
+  ports:
+  - name: http
+    port: 80
+  selector:
+    app: watch-page
+
+

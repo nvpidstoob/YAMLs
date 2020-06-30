@@ -1,0 +1,41 @@
+
+kind: Gateway
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: page-gateway
+  namespace: istio-system
+spec:
+  servers:
+    - port:
+        number: 443
+        name: https-landing-page
+        protocol: HTTPS      
+      hosts:
+        - "www.jush.it"
+      tls:
+        mode: SIMPLE
+        credentialName: landing-page-secret
+    - port:
+        number: 443
+        name: https-shopping-page
+        protocol: HTTPS      
+      hosts:
+        - "shopping.jush.it"
+      tls:
+        mode: SIMPLE
+        credentialName: shopping-page-secret
+    - port:
+        number: 443
+        name: https-watch-page
+        protocol: HTTPS      
+      hosts:
+        - "stream.jush.it"
+      tls:
+        mode: SIMPLE
+        credentialName: watch-page-secret
+  selector:
+    istio: ingressgateway
+
+
+
+
