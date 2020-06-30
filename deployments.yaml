@@ -1,49 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: landing-page-v2
-  namespace: landing-page 
-  labels:
-    app: landing-page
-    version: v2
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: landing-page
-  template:
-    metadata:
-      labels:
-        app: landing-page
-        version: v2
-    spec:
-      containers:
-      - name: landing-page
-        image: nvpidstoob/diplomarbeit:landingpage-v2
-         resources: 
-          limits:
-             memory: "500Mi"
-             cpu: "100m"
-          requests:
-             memory: "100Mi"
-             cpu: "50m"
-        ports:
-        - containerPort: 80
-      imagePullSecrets:
-      - name: dockerregistrykey
-
----
-
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: shopping-page-v2
+  name: shopping-page-v3
   namespace: shopping-page 
   labels:
     app: shopping-page
-    version: v2
+    version: v3
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: shopping-page
@@ -51,12 +15,12 @@ spec:
     metadata:
       labels:
         app: shopping-page
-        version: v2
+        version: v3
     spec:
       containers:
       - name: shopping-page
-        image: nvpidstoob/diplomarbeit:shoppingpage-v2
-         resources: 
+        image: nvpidstoob/diplomarbeit:shoppingpage-v3
+        resources: 
           limits:
              memory: "500Mi"
              cpu: "100m"
@@ -70,17 +34,52 @@ spec:
 
 ---
 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: landing-page-v3
+  namespace: landing-page 
+  labels:
+    app: landing-page
+    version: v3
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: landing-page
+  template:
+    metadata:
+      labels:
+        app: landing-page
+        version: v3
+    spec:
+      containers:
+      - name: landing-page
+        image: nvpidstoob/diplomarbeit:landingpage-v3
+        resources: 
+          limits:
+             memory: "500Mi"
+             cpu: "100m"
+          requests:
+             memory: "100Mi"
+             cpu: "50m"
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: dockerregistrykey
+
+---
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: watch-page-v2
+  name: watch-page-v3
   namespace: watch-page 
   labels:
     app: watch-page
-    version: v2
+    version: v3
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: watch-page
@@ -88,12 +87,12 @@ spec:
     metadata:
       labels:
         app: watch-page
-        version: v2
+        version: v3
     spec:
       containers:
       - name: watch-page
-        image: nvpidstoob/diplomarbeit:watchpage-v2
-         resources: 
+        image: nvpidstoob/diplomarbeit:watchpage-v3
+        resources: 
           limits:
              memory: "500Mi"
              cpu: "100m"
@@ -118,8 +117,8 @@ spec:
   host: watch-page-service
   subsets:
     - labels:
-        version: v1
-      name: v1
+        version: v3
+      name: v3
     - labels:
         version: v2
       name: v2
@@ -137,8 +136,8 @@ spec:
   host: landing-page-service
   subsets:
     - labels:
-        version: v1
-      name: v1
+        version: v3
+      name: v3
     - labels:
         version: v2
       name: v2
@@ -156,8 +155,8 @@ spec:
   host: shopping-page-service
   subsets:
     - labels:
-        version: v1
-      name: v1
+        version: v3
+      name: v3
     - labels:
         version: v2
       name: v2
@@ -181,11 +180,11 @@ spec:
   - route:
     - destination:
         host: landing-page-service
-        subset: v1
+        subset: v2
       weight: 90
     - destination:
         host: landing-page-service
-        subset: v2
+        subset: v3
       weight: 10
 
 ---
@@ -207,11 +206,11 @@ spec:
   - route:
     - destination:
         host: shopping-page-service
-        subset: v1
+        subset: v2
       weight: 90
     - destination:
         host: shopping-page-service
-        subset: v2
+        subset: v3
       weight: 10
 
 ---
@@ -233,11 +232,11 @@ spec:
   - route:
     - destination:
         host: watch-page-service
-        subset: v1
+        subset: v2
       weight: 90
     - destination:
         host: watch-page-service
-        subset: v2
+        subset: v3
       weight: 10
    
 
