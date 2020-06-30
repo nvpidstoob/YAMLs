@@ -14,7 +14,7 @@ spec:
     base:
       enabled: true
     cni:
-      enabled: true
+      enabled: false
     ingressGateways:
     - enabled: true
       k8s:
