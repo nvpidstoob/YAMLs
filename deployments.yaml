@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: landing-page-v1
+  name: landing-page-v2
   namespace: landing-page 
   labels:
     app: landing-page
-    version: v1
+    version: v2
 spec:
   replicas: 1
   selector:
@@ -15,12 +15,12 @@ spec:
     metadata:
       labels:
         app: landing-page
-        version: v1
+        version: v2
     spec:
       containers:
       - name: landing-page
-        image: nvpidstoob/diplomarbeit:landingpage
-        resources: 
+        image: nvpidstoob/diplomarbeit:landingpage-v2
+         resources: 
           limits:
              memory: "500Mi"
              cpu: "100m"
@@ -34,16 +34,14 @@ spec:
 
 ---
 
-
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: shopping-page-v1
+  name: shopping-page-v2
   namespace: shopping-page 
   labels:
     app: shopping-page
-    version: v1
+    version: v2
 spec:
   replicas: 1
   selector:
@@ -53,11 +51,11 @@ spec:
     metadata:
       labels:
         app: shopping-page
-        version: v1
+        version: v2
     spec:
       containers:
       - name: shopping-page
-        image: nvpidstoob/diplomarbeit:shoppingpage
+        image: nvpidstoob/diplomarbeit:shoppingpage-v2
          resources: 
           limits:
              memory: "500Mi"
@@ -76,11 +74,11 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: watch-page-v1
+  name: watch-page-v2
   namespace: watch-page 
   labels:
     app: watch-page
-    version: v1
+    version: v2
 spec:
   replicas: 1
   selector:
@@ -90,11 +88,11 @@ spec:
     metadata:
       labels:
         app: watch-page
-        version: v1
+        version: v2
     spec:
       containers:
       - name: watch-page
-        image: nvpidstoob/diplomarbeit:watchpage
+        image: nvpidstoob/diplomarbeit:watchpage-v2
          resources: 
           limits:
              memory: "500Mi"
@@ -122,6 +120,9 @@ spec:
     - labels:
         version: v1
       name: v1
+    - labels:
+        version: v2
+      name: v2
   
 ---
 
@@ -138,6 +139,9 @@ spec:
     - labels:
         version: v1
       name: v1
+    - labels:
+        version: v2
+      name: v2
 
 ---
 
@@ -154,6 +158,9 @@ spec:
     - labels:
         version: v1
       name: v1
+    - labels:
+        version: v2
+      name: v2
 
 ---
 
@@ -175,7 +182,11 @@ spec:
     - destination:
         host: landing-page-service
         subset: v1
-      weight: 100
+      weight: 90
+    - destination:
+        host: landing-page-service
+        subset: v2
+      weight: 10
 
 ---
 
@@ -197,7 +208,11 @@ spec:
     - destination:
         host: shopping-page-service
         subset: v1
-      weight: 100
+      weight: 90
+    - destination:
+        host: shopping-page-service
+        subset: v2
+      weight: 10
 
 ---
 
@@ -219,7 +234,11 @@ spec:
     - destination:
         host: watch-page-service
         subset: v1
-      weight: 100
+      weight: 90
+    - destination:
+        host: watch-page-service
+        subset: v2
+      weight: 10
    
 
 
