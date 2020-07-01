@@ -103,5 +103,3 @@ spec:
         - containerPort: 80
       imagePullSecrets:
       - name: dockerregistrykey
-     
-      
