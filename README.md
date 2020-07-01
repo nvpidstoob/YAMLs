@@ -1,5 +1,5 @@
 # YAMLs
-diplomarbeit
+Diplomarbeit
 
 Insallation ##istio-install.yaml
 
