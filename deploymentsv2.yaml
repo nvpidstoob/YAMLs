@@ -1,0 +1,105 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: landing-page-v2
+  namespace: landing-page 
+  labels:
+    app: landing-page
+    version: v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: landing-page
+  template:
+    metadata:
+      labels:
+        app: landing-page
+        version: v2
+    spec:
+      containers:
+      - name: landing-page
+        image: nvpidstoob/diplomarbeit:landingpage-v2
+        resources: 
+          limits:
+             memory: "500Mi"
+             cpu: "100m"
+          requests:
+             memory: "100Mi"
+             cpu: "50m"
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: dockerregistrykey
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shopping-page-v2
+  namespace: shopping-page 
+  labels:
+    app: shopping-page
+    version: v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shopping-page
+  template:
+    metadata:
+      labels:
+        app: shopping-page
+        version: v2
+    spec:
+      containers:
+      - name: shopping-page
+        image: nvpidstoob/diplomarbeit:shoppingpage-v2
+        resources: 
+          limits:
+             memory: "500Mi"
+             cpu: "100m"
+          requests:
+             memory: "100Mi"
+             cpu: "50m"
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: dockerregistrykey
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: watch-page-v2
+  namespace: watch-page 
+  labels:
+    app: watch-page
+    version: v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: watch-page
+  template:
+    metadata:
+      labels:
+        app: watch-page
+        version: v2
+    spec:
+      containers:
+      - name: watch-page
+        image: nvpidstoob/diplomarbeit:watchpage-v2
+        resources: 
+          limits:
+             memory: "500Mi"
+             cpu: "100m"
+          requests:
+             memory: "100Mi"
+             cpu: "50m"
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: dockerregistrykey
