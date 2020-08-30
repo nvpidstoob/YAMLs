@@ -1,7 +1,7 @@
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: shopping-page-v3
+  name: shopping-page-v4
   namespace: shopping-page
 spec:
   maxReplicas: 5
@@ -9,7 +9,7 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: shopping-page-v3
+    name: shopping-page-v4
   targetCPUUtilizationPercentage: 50
 status:
   currentReplicas: 0
@@ -21,7 +21,7 @@ status:
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: landing-page-v3
+  name: landing-page-v4
   namespace: landing-page
 spec:
   maxReplicas: 5
@@ -29,7 +29,7 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: landing-page-v3
+    name: landing-page-v4
   targetCPUUtilizationPercentage: 50
 status:
   currentReplicas: 0
@@ -41,7 +41,7 @@ status:
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: watch-page-v3
+  name: watch-page-v4
   namespace: watch-page
 spec:
   maxReplicas: 5
@@ -49,7 +49,7 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: watch-page-v3
+    name: watch-page-v4
   targetCPUUtilizationPercentage: 50
 status:
   currentReplicas: 0
